@@ -1,0 +1,69 @@
+{
+  "name": "legend-core-yolo",
+  "description": "LEGEND YOLO Mode - Fully autonomous execution without approval gates",
+  "stack": {
+    "frontend": "nextjs-app-router",
+    "backend": "supabase",
+    "db": "postgres+pgvector",
+    "deploy": "vercel",
+    "language": "typescript"
+  },
+  "testing": {
+    "unit": "vitest",
+    "e2e": "playwright",
+    "coverageThreshold": 80,
+    "requiredTestTypes": ["unit"]
+  },
+  "constraints": {
+    "prefer_small_diffs": true,
+    "no_direct_prod_commands": false,
+    "require_review": false,
+    "require_approval": false,
+    "auto_execute": true,
+    "yolo_mode": true,
+    "max_files_per_pr": 50
+  },
+  "conventions": {
+    "naming": "kebab-case",
+    "componentDir": "src/components",
+    "apiDir": "app/api",
+    "libDir": "src/lib",
+    "testSuffix": ".test.ts"
+  },
+  "phases": {
+    "required": ["SCOPED", "DESIGNED", "IMPLEMENTED", "TESTED"],
+    "optional": ["REVIEWED"]
+  },
+  "infrastructure": {
+    "supabase": {
+      "projectRef": "",
+      "stagingBranchId": "",
+      "productionUrl": ""
+    },
+    "vercel": {
+      "projectId": "",
+      "teamId": "",
+      "aiGateway": false
+    },
+    "git": {
+      "remote": "",
+      "provider": "github",
+      "branchPrefix": "feature/",
+      "requirePR": false
+    },
+    "ci": {
+      "provider": "",
+      "workflowFile": ""
+    }
+  },
+  "integrations": {
+    "slack": {
+      "webhookUrl": "",
+      "notifyOn": []
+    }
+  },
+  "ai": {
+    "preferredModel": "",
+    "maxTokensPerRequest": 8000
+  }
+}

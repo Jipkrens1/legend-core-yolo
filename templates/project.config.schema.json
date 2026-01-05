@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LEGEND Project Configuration",
+  "type": "object",
+  "required": ["name", "stack"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name"
+    },
+    "stack": {
+      "type": "object",
+      "properties": {
+        "frontend": {
+          "type": "string",
+          "description": "Frontend framework (e.g., nextjs-app-router, sveltekit, remix)"
+        },
+        "backend": {
+          "type": "string",
+          "description": "Backend framework (e.g., supabase, next-api, express)"
+        },
+        "db": {
+          "type": "string",
+          "description": "Database (e.g., postgres, postgres+pgvector, mysql)"
+        },
+        "deploy": {
+          "type": "string",
+          "description": "Deployment target (e.g., vercel, netlify, aws)"
+        },
+        "language": {
+          "type": "string",
+          "description": "Primary language (e.g., typescript, javascript)"
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "Unit test framework (e.g., vitest, jest)"
+        },
+        "e2e": {
+          "type": "string",
+          "description": "E2E test framework (e.g., playwright, cypress)"
+        },
+        "coverageThreshold": {
+          "type": "number",
+          "description": "Minimum coverage percentage required",
+          "default": 80
+        },
+        "requiredTestTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["unit", "integration", "e2e"]
+          },
+          "description": "Test types required before marking TESTED"
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "prefer_small_diffs": {
+          "type": "boolean",
+          "description": "Prefer small, incremental changes",
+          "default": true
+        },
+        "no_direct_prod_commands": {
+          "type": "boolean",
+          "description": "Prevent direct production commands",
+          "default": true
+        },
+        "require_review": {
+          "type": "boolean",
+          "description": "Require code review before TESTED phase",
+          "default": false
+        },
+        "max_files_per_pr": {
+          "type": "number",
+          "description": "Maximum files changed per PR/feature",
+          "default": 20
+        }
+      }
+    },
+    "conventions": {
+      "type": "object",
+      "properties": {
+        "naming": {
+          "type": "string",
+          "enum": ["kebab-case", "camelCase", "PascalCase", "snake_case"],
+          "description": "File naming convention"
+        },
+        "componentDir": {
+          "type": "string",
+          "description": "Directory for components (e.g., src/components)"
+        },
+        "apiDir": {
+          "type": "string",
+          "description": "Directory for API routes (e.g., app/api)"
+        },
+        "libDir": {
+          "type": "string",
+          "description": "Directory for shared utilities (e.g., src/lib)"
+        },
+        "testSuffix": {
+          "type": "string",
+          "description": "Test file suffix (e.g., .test.ts, .spec.ts)"
+        }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["SCOPED", "DESIGNED", "IMPLEMENTED", "REVIEWED", "TESTED"]
+          },
+          "description": "Phases required for feature completion"
+        },
+        "optional": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["SCOPED", "DESIGNED", "IMPLEMENTED", "REVIEWED", "TESTED"]
+          },
+          "description": "Optional phases that can be skipped"
+        }
+      }
+    },
+    "infrastructure": {
+      "type": "object",
+      "properties": {
+        "supabase": {
+          "type": "object",
+          "properties": {
+            "projectRef": { "type": "string" },
+            "stagingBranchId": { "type": "string" },
+            "productionUrl": { "type": "string" }
+          }
+        },
+        "vercel": {
+          "type": "object",
+          "properties": {
+            "projectId": { "type": "string" },
+            "teamId": { "type": "string" },
+            "aiGateway": { "type": "boolean" }
+          }
+        },
+        "git": {
+          "type": "object",
+          "properties": {
+            "remote": { "type": "string" },
+            "provider": {
+              "type": "string",
+              "enum": ["github", "gitlab", "bitbucket"]
+            },
+            "branchPrefix": {
+              "type": "string",
+              "description": "Prefix for feature branches",
+              "default": "feature/"
+            },
+            "requirePR": {
+              "type": "boolean",
+              "description": "Require PR for merging features",
+              "default": true
+            }
+          }
+        },
+        "ci": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "enum": ["github-actions", "gitlab-ci", "circleci"]
+            },
+            "workflowFile": { "type": "string" }
+          }
+        }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "properties": {
+        "slack": {
+          "type": "object",
+          "properties": {
+            "webhookUrl": { "type": "string" },
+            "notifyOn": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["SCOPED", "DESIGNED", "IMPLEMENTED", "TESTED", "READY", "FAILED"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ai": {
+      "type": "object",
+      "properties": {
+        "preferredModel": {
+          "type": "string",
+          "description": "Preferred AI model for code generation"
+        },
+        "maxTokensPerRequest": {
+          "type": "number",
+          "description": "Maximum tokens per AI request"
+        }
+      }
+    }
+  }
+}

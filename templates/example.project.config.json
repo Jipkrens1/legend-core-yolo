@@ -1,0 +1,38 @@
+{
+  "name": "ai-experiment-platform",
+  "stack": {
+    "frontend": "nextjs-app-router",
+    "backend": "supabase",
+    "db": "postgres+pgvector",
+    "deploy": "vercel",
+    "language": "typescript"
+  },
+  "testing": {
+    "unit": "vitest",
+    "e2e": "playwright"
+  },
+  "constraints": {
+    "prefer_small_diffs": true,
+    "no_direct_prod_commands": true
+  },
+  "infrastructure": {
+    "supabase": {
+      "projectRef": "",
+      "stagingBranchId": "",
+      "productionUrl": ""
+    },
+    "vercel": {
+      "projectId": "",
+      "teamId": "",
+      "aiGateway": false
+    },
+    "git": {
+      "remote": "",
+      "provider": ""
+    }
+  }
+}
+
+
+
+
