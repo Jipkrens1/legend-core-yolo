@@ -46,7 +46,7 @@
       "aiGateway": false
     },
     "git": {
-      "remote": "",
+      "remote": "https://github.com/Jipkrens1/legend-core-yolo.git",
       "provider": "github",
       "branchPrefix": "feature/",
       "requirePR": false
