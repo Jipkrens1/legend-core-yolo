@@ -1,12 +1,15 @@
 {
-  "name": "legend-core-yolo",
-  "description": "LEGEND YOLO Mode - Fully autonomous execution without approval gates",
+  "name": "compass",
+  "description": "Project management application for agencies - Dutch language, client project tracking",
   "stack": {
-    "frontend": "nextjs-app-router",
+    "frontend": "react-vite",
     "backend": "supabase",
-    "db": "postgres+pgvector",
+    "db": "postgres",
     "deploy": "vercel",
-    "language": "typescript"
+    "language": "typescript",
+    "styling": "tailwindcss",
+    "ui": "shadcn-ui",
+    "state": "tanstack-query"
   },
   "testing": {
     "unit": "vitest",
